@@ -1,5 +1,5 @@
 {
-  "name": "dbIndexed",
+  "name": "dbindexed",
   "version": "1.0.0",
   "description": "Simple wrap from indexedDB",
   "main": "index.js",
