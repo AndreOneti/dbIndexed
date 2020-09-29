@@ -1,6 +1,6 @@
 # dbIndexed
 
-
+```javascript
 let db;
 (async function () {
   db = new dbIndexed("test")
@@ -20,3 +20,4 @@ let db;
   console.log(oldFriends5);
   console.log(oldFriends6);
 })();
+```
