@@ -6,7 +6,7 @@
       (global.dbIndexed = factory);
 }(this, class dbIndexed {
   constructor(dbName) {
-    this.dbName = dbName || 'todoStore';
+    this.dbName = dbName || 'indexedDB';
     this.version;
   }
 
@@ -100,6 +100,22 @@
                 } else {
                   reject("Object without id, can't update.");
                 }
+              });
+            });
+          },
+          bulkAdd: async function (list) {
+            return new Promise((resolve, reject) => {
+              this.connectDB(this, function (db, colletion) {
+                var transaction = db.transaction([colletion.name], "readwrite")
+                var objectStore = transaction.objectStore(colletion.name);
+                var listAdd = list.map(item => new Promise((res, reject) => {
+                  var objectStoreRequest = objectStore.add(item);
+                  objectStoreRequest.onerror = reject;
+                  objectStoreRequest.onsuccess = function () {
+                    res({ ...item, id: objectStoreRequest.result });
+                  }
+                }));
+                Promise.all(listAdd).then(resolve).catch(reject);
               });
             });
           },

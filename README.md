@@ -20,4 +20,16 @@ let db;
   console.log(oldFriends5);
   console.log(oldFriends6);
 })();
+
+(async function () {
+  let idb = new dbIndexed();
+  await idb.version(1.1).stores({ tasks: '++id,description' });
+  let add = await idb.tasks.bulkAdd([
+    { "description": "learn JavaScript", "done": true },
+    { "description": "learn TypeScript", "done": false },
+    { "description": "learn PWA", "done": false },
+    { "description": "learn Java", "done": true },
+  ]);
+  console.log(add);
+})();
 ```
