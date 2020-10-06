@@ -13,7 +13,7 @@ yarn add dbindexed
 <!doctype html>
 <html>
   <head>
-    <!-- Include Dexie -->
+    <!-- Include DBIndexed -->
     <script src="https://unpkg.com/dbindexed@latest/index.js"></script>
 
     <script>
@@ -92,6 +92,9 @@ let db;
 
   await db.users.where("name").notContains("andre");
   // [{ "name": "lucas oneti", "age": 23, id: 2 }]
+
+  await db.users.where({ "name": "andre oneti" });
+  // [{ "name": "andre oneti", "age": 26, id: 1 }]
 })();
 
 (async function () {
